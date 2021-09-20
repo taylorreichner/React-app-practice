@@ -20,3 +20,15 @@ export const getDog = async () => {
         dog: dogReq.url,
     }
 }
+
+export const searchDomain = async (company) => {
+    const res = await fetch (`https://api.domainsdb.info/v1/domains/search?domain=${company}`)
+
+    const req = await res.json()
+    console.log(req)
+    return req.domains.map((domain) => ({
+        name: domain.domain,
+        issued: domain.create_date,
+        country: domain.country,
+    }))
+}
